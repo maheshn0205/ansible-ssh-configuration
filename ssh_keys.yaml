@@ -1,0 +1,10 @@
+---
+- name: Share SSH public key with target nodes
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure SSH public key is added to authorized_keys
+      ansible.posix.authorized_key:
+        user: "{{ ansible_user }}"
+        state: present
+        key: "{{ lookup('file', '/home/mahesh0205/.ssh/id_rsa.pub') }}"
